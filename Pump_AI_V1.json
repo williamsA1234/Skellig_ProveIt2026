@@ -1,0 +1,231 @@
+{
+  "profileName": "Pump_AI_V1",
+  "version": "1.0.0",
+  "description": "Pump with analog speed feedback only (no setpoint output). Includes four-level limit alarms on speed, bad quality detection on AI channel, and ESTOP. Used for pumps with local speed control where only monitoring is required.",
+  "applicableTo": "Pumps with analog speed feedback only (AI, no AO)",
+  "ignitionUdtSource": "ProveIt/Pump_AI",
+  "Device_Core": {
+    "description": "Equipment identity and context metadata",
+    "attributes": [
+      {
+        "name": "TagName",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "ISA-5.1 instrument tag identifier (e.g., XV-250-001)"
+      },
+      {
+        "name": "ShortName",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "Human-readable equipment name used in UNS topic path (e.g., Harvest Valve)"
+      },
+      {
+        "name": "Description",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "Free-text description of the equipment instance"
+      },
+      {
+        "name": "Area",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "ISA-95 area designation (e.g., Cell_Culture)"
+      },
+      {
+        "name": "Unit",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "ISA-95 unit designation (e.g., SUB-250)"
+      },
+      {
+        "name": "ProfileDefinition",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "URL to the SM Profile definition that this instance conforms to"
+      }
+    ]
+  },
+  "IO": {
+    "description": "Process I/O - analog input bound to field instruments via MQTT",
+    "attributes": [
+      {
+        "name": "Speed_PV",
+        "dataType": "opc:Double",
+        "nodeId": "i=11",
+        "description": "Measured pump speed from field instrument",
+        "engUnit": "per-instance (MQTT suffix: _RPM or _percent)",
+        "accessLevel": "Read"
+      }
+    ]
+  },
+  "Parameters": {
+    "description": "Configurable parameters for alarm setpoints, operating modes, and alarm enables",
+    "attributes": [
+      {
+        "name": "High_High_Sp",
+        "dataType": "opc:Float",
+        "nodeId": "i=10",
+        "description": "High-High alarm setpoint for Speed_PV",
+        "defaultValue": 100
+      },
+      {
+        "name": "High_Sp",
+        "dataType": "opc:Float",
+        "nodeId": "i=10",
+        "description": "High alarm setpoint for Speed_PV",
+        "defaultValue": 90
+      },
+      {
+        "name": "Low_Sp",
+        "dataType": "opc:Float",
+        "nodeId": "i=10",
+        "description": "Low alarm setpoint for Speed_PV",
+        "defaultValue": 10
+      },
+      {
+        "name": "Low_Low_Sp",
+        "dataType": "opc:Float",
+        "nodeId": "i=10",
+        "description": "Low-Low alarm setpoint for Speed_PV",
+        "defaultValue": 30
+      },
+      {
+        "name": "High_High_Enab",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Enable/disable High-High limit alarm",
+        "defaultValue": false
+      },
+      {
+        "name": "High_Enab",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Enable/disable High limit alarm",
+        "defaultValue": false
+      },
+      {
+        "name": "Low_Enab",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Enable/disable Low limit alarm",
+        "defaultValue": false
+      },
+      {
+        "name": "Low_Low_Enab",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Enable/disable Low-Low limit alarm",
+        "defaultValue": false
+      },
+      {
+        "name": "Out_Min",
+        "dataType": "opc:Float",
+        "nodeId": "i=10",
+        "description": "Minimum output clamp value",
+        "defaultValue": 0.0
+      },
+      {
+        "name": "Out_Max",
+        "dataType": "opc:Float",
+        "nodeId": "i=10",
+        "description": "Maximum output clamp value",
+        "defaultValue": 100.0
+      },
+      {
+        "name": "AI_Bad_Alarm_Enab",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Enable/disable bad quality alarm on analog input (PV)",
+        "defaultValue": false
+      },
+      {
+        "name": "Operator",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Operator acknowledgment or manual override flag",
+        "defaultValue": false
+      },
+      {
+        "name": "Maintenance",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Equipment is in maintenance mode",
+        "defaultValue": false
+      },
+      {
+        "name": "OOS",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Equipment is out of service",
+        "defaultValue": false
+      },
+      {
+        "name": "Interlocked",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Equipment is interlocked (prevented from operating)",
+        "defaultValue": false
+      },
+      {
+        "name": "ResetReq",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Reset request flag (clear alarm or fault condition)",
+        "defaultValue": false
+      }
+    ]
+  },
+  "Alarms": {
+    "description": "Alarm conditions: four-level limit alarms on Speed_PV; bad quality on AI; ESTOP",
+    "attributes": [
+      {
+        "name": "High_High",
+        "alarmType": "opc:LimitAlarmType",
+        "condition": "Speed_PV > Parameters.High_High_Sp",
+        "priority": "High",
+        "enabledBy": "Parameters.High_High_Enab",
+        "description": "Speed_PV exceeds high-high limit"
+      },
+      {
+        "name": "High",
+        "alarmType": "opc:LimitAlarmType",
+        "condition": "Speed_PV > Parameters.High_Sp",
+        "priority": "Low",
+        "enabledBy": "Parameters.High_Enab",
+        "description": "Speed_PV exceeds high limit"
+      },
+      {
+        "name": "Low",
+        "alarmType": "opc:LimitAlarmType",
+        "condition": "Speed_PV < Parameters.Low_Sp",
+        "priority": "Low",
+        "enabledBy": "Parameters.Low_Enab",
+        "description": "Speed_PV falls below low limit"
+      },
+      {
+        "name": "Low_Low",
+        "alarmType": "opc:LimitAlarmType",
+        "condition": "Speed_PV < Parameters.Low_Low_Sp",
+        "priority": "High",
+        "enabledBy": "Parameters.Low_Low_Enab",
+        "description": "Speed_PV falls below low-low limit"
+      },
+      {
+        "name": "AI_Bad_Quality",
+        "alarmType": "opc:OffNormalAlarmType",
+        "condition": "Speed_PV quality is Bad",
+        "priority": "High",
+        "enabledBy": "Parameters.AI_Bad_Alarm_Enab",
+        "description": "Analog input (pv) has bad data quality (communication loss)"
+      },
+      {
+        "name": "ESTOP",
+        "alarmType": "opc:OffNormalAlarmType",
+        "condition": "ESTOP == true",
+        "priority": "Critical",
+        "enabledBy": "always",
+        "description": "Emergency stop activated"
+      }
+    ]
+  }
+}

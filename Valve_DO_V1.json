@@ -1,0 +1,147 @@
+{
+  "profileName": "Valve_DO_V1",
+  "version": "1.0.0",
+  "description": "On/off valve with digital output command (open/close). Includes bad quality detection and ESTOP. Used for isolation valves, drain valves, and similar binary-position valves in single-use bioprocessing systems.",
+  "applicableTo": "Binary on/off valves controlled via digital output (DO)",
+  "ignitionUdtSource": "ProveIt/Valve_DO",
+
+  "Device_Core": {
+    "description": "Equipment identity and context metadata",
+    "attributes": [
+      {
+        "name": "TagName",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "ISA-5.1 instrument tag identifier (e.g., XV-250-001)"
+      },
+      {
+        "name": "ShortName",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "Human-readable equipment name used in UNS topic path (e.g., Harvest Valve)"
+      },
+      {
+        "name": "Description",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "Free-text description of the equipment instance"
+      },
+      {
+        "name": "Area",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "ISA-95 area designation (e.g., Cell_Culture)"
+      },
+      {
+        "name": "Unit",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "ISA-95 unit designation (e.g., SUB-250)"
+      },
+      {
+        "name": "ProfileDefinition",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "URL to the SM Profile definition that this instance conforms to"
+      }
+    ]
+  },
+
+  "IO": {
+    "description": "Process I/O - digital output command bound to field instrument via MQTT",
+    "attributes": [
+      {
+        "name": "Valve_Position_SP",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Valve position command: true = open, false = closed",
+        "mqttSuffix": "PV",
+        "accessLevel": "ReadWrite"
+      }
+    ]
+  },
+
+  "Parameters": {
+    "description": "Configurable parameters for operating modes and alarm enables",
+    "attributes": [
+      {
+        "name": "Mode",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "Operating mode (e.g., Auto, Manual, Null)",
+        "defaultValue": "Null"
+      },
+      {
+        "name": "Bypass",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Valve command is bypassed (ignored by control logic)",
+        "defaultValue": false
+      },
+      {
+        "name": "DO_Bad_Alarm_Enab",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Enable/disable bad quality alarm on valve command output",
+        "defaultValue": false
+      },
+      {
+        "name": "Operator",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Operator acknowledgment or manual override flag",
+        "defaultValue": false
+      },
+      {
+        "name": "Maintenance",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Equipment is in maintenance mode",
+        "defaultValue": false
+      },
+      {
+        "name": "OOS",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Equipment is out of service",
+        "defaultValue": false
+      },
+      {
+        "name": "Interlocked",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Equipment is interlocked (prevented from operating)",
+        "defaultValue": false
+      },
+      {
+        "name": "ResetReq",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Reset request flag (clear alarm or fault condition)",
+        "defaultValue": false
+      }
+    ]
+  },
+
+  "Alarms": {
+    "description": "Alarm conditions for the valve. No limit alarms (digital output has no PV to evaluate against thresholds).",
+    "attributes": [
+      {
+        "name": "DO_Bad_Quality",
+        "alarmType": "opc:OffNormalAlarmType",
+        "condition": "Valve_Position_SP quality is Bad",
+        "priority": "High",
+        "enabledBy": "Parameters.DO_Bad_Alarm_Enab",
+        "description": "Valve command output has bad data quality (communication loss)"
+      },
+      {
+        "name": "ESTOP",
+        "alarmType": "opc:OffNormalAlarmType",
+        "condition": "ESTOP == true",
+        "priority": "Critical",
+        "enabledBy": "always",
+        "description": "Emergency stop activated"
+      }
+    ]
+  }
+}

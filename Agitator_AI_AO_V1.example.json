@@ -1,0 +1,69 @@
+{
+  "_comment": "Example MQTT payload conforming to Agitator_AI_AO_V1 SM Profile",
+  "profileDefinition": "https://github.com/SkelligAutomation/Skellig_ProveIt2026/smprofiles/Agitator_AI_AO_V1.json",
+  "Device_Core": {
+    "TagName": "SE-250-001",
+    "ShortName": "Agitator",
+    "Description": "",
+    "Area": "Cell_Culture",
+    "Unit": "SUB-250",
+    "ProfileDefinition": "https://github.com/SkelligAutomation/Skellig_ProveIt2026/smprofiles/Agitator_AI_AO_V1.json"
+  },
+  "IO": {
+    "Speed_PV": {
+      "Value": 0.0
+    },
+    "Speed_SP": {
+      "Setpoint": 0.0
+    }
+  },
+  "Parameters": {
+    "High_High_Sp": 100,
+    "High_Sp": 90,
+    "Low_Sp": 10,
+    "Low_Low_Sp": 30,
+    "High_High_Enab": false,
+    "High_Enab": false,
+    "Low_Enab": false,
+    "Low_Low_Enab": false,
+    "Out_Min": 0.0,
+    "Out_Max": 100.0,
+    "AI_Bad_Alarm_Enab": false,
+    "AO_Bad_Alarm_Enab": false,
+    "Operator": false,
+    "Maintenance": false,
+    "OOS": false,
+    "Interlocked": false,
+    "ResetReq": false
+  },
+  "Alarms": {
+    "High_High": {
+      "active": false,
+      "priority": "High"
+    },
+    "High": {
+      "active": false,
+      "priority": "Low"
+    },
+    "Low": {
+      "active": false,
+      "priority": "Low"
+    },
+    "Low_Low": {
+      "active": false,
+      "priority": "High"
+    },
+    "AI_Bad_Quality": {
+      "active": false,
+      "priority": "High"
+    },
+    "AO_Bad_Quality": {
+      "active": false,
+      "priority": "High"
+    },
+    "ESTOP": {
+      "active": false,
+      "priority": "Critical"
+    }
+  }
+}
