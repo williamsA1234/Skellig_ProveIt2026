@@ -21,6 +21,12 @@
         "description": "Human-readable equipment name used in UNS topic path (e.g., Harvest Valve)"
       },
       {
+        "name": "ProfileDefinition",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "URL to the SM Profile definition that this instance conforms to"
+      },
+      {
         "name": "Description",
         "dataType": "opc:String",
         "nodeId": "i=12",
@@ -37,12 +43,6 @@
         "dataType": "opc:String",
         "nodeId": "i=12",
         "description": "ISA-95 unit designation (e.g., SUB-250)"
-      },
-      {
-        "name": "ProfileDefinition",
-        "dataType": "opc:String",
-        "nodeId": "i=12",
-        "description": "URL to the SM Profile definition that this instance conforms to"
       }
     ]
   },
