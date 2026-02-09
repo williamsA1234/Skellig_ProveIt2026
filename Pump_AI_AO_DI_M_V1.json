@@ -65,7 +65,7 @@
         "accessLevel": "ReadWrite"
       },
       {
-        "name": "Start_Command",
+        "name": "Status",
         "dataType": "opc:Boolean",
         "nodeId": "i=1",
         "description": "Start command confirmation from VFD or PLC (true = running)",
@@ -265,7 +265,7 @@
       {
         "name": "DI_Bad_Quality",
         "alarmType": "opc:OffNormalAlarmType",
-        "condition": "Start_Command quality is Bad",
+        "condition": "Status quality is Bad",
         "priority": "High",
         "enabledBy": "Parameters.DI_Bad_Alarm_Enab",
         "description": "Digital input has bad data quality (communication loss)"

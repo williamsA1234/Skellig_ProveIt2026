@@ -65,7 +65,7 @@
         "accessLevel": "ReadWrite"
       },
       {
-        "name": "Start_Command",
+        "name": "Status",
         "dataType": "opc:Boolean",
         "nodeId": "i=1",
         "description": "Start command confirmation from VFD or PLC (true = running)",
@@ -73,7 +73,7 @@
         "accessLevel": "Read"
       },
       {
-        "name": "Status",
+        "name": "Start_Command",
         "dataType": "opc:Boolean",
         "nodeId": "i=1",
         "description": "Run/stop command output to pump (true = run)",
@@ -281,7 +281,7 @@
       {
         "name": "DI_Bad_Quality",
         "alarmType": "opc:OffNormalAlarmType",
-        "condition": "Start_Command quality is Bad",
+        "condition": "Status quality is Bad",
         "priority": "High",
         "enabledBy": "Parameters.DI_Bad_Alarm_Enab",
         "description": "Digital input has bad data quality (communication loss)"
@@ -289,7 +289,7 @@
       {
         "name": "DO_Bad_Quality",
         "alarmType": "opc:OffNormalAlarmType",
-        "condition": "Status quality is Bad",
+        "condition": "Start_Command quality is Bad",
         "priority": "High",
         "enabledBy": "Parameters.DO_Bad_Alarm_Enab",
         "description": "Digital output has bad data quality (communication loss)"
