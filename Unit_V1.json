@@ -1,0 +1,116 @@
+{
+  "profileName": "Unit_V1",
+  "version": "1.0.0",
+  "description": "ISA-88 batch unit profile. Represents a process unit (e.g., bioreactor, mixer) with batch execution context including recipe, phase, formula, batch ID, and operator interaction fields. All process data sourced from OPC.",
+  "applicableTo": "ISA-88 batch process units with recipe execution context",
+  "ignitionUdtSource": "Core/Unit",
+  "Device_Core": {
+    "description": "Equipment identity and context metadata",
+    "attributes": [
+      {
+        "name": "TagName",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "ISA-5.1 instrument tag identifier"
+      },
+      {
+        "name": "ShortName",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "Human-readable equipment name used in UNS topic path"
+      },
+      {
+        "name": "ProfileDefinition",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "URL to the SM Profile definition that this instance conforms to"
+      },
+      {
+        "name": "Description",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "Free-text description of the equipment instance"
+      },
+      {
+        "name": "Area",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "ISA-95 area designation"
+      },
+      {
+        "name": "Unit",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "ISA-95 unit designation"
+      }
+    ]
+  },
+  "BatchContext": {
+    "description": "ISA-88 batch execution context - recipe, phase, state, and operator interaction. All values sourced from OPC.",
+    "attributes": [
+      {
+        "name": "BatchID",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "Current batch identifier",
+        "accessLevel": "Read"
+      },
+      {
+        "name": "Recipe",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "Active recipe name",
+        "accessLevel": "Read"
+      },
+      {
+        "name": "Formula",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "Active formula name",
+        "accessLevel": "Read"
+      },
+      {
+        "name": "Phase",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "Current phase of batch execution",
+        "accessLevel": "Read"
+      },
+      {
+        "name": "State",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "Current unit state (e.g., Running, Idle, Held)",
+        "accessLevel": "Read"
+      },
+      {
+        "name": "Message1",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "Primary operator message from batch engine",
+        "accessLevel": "Read"
+      },
+      {
+        "name": "Message2",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "Secondary operator message from batch engine",
+        "accessLevel": "Read"
+      },
+      {
+        "name": "User_Acknowledge",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "Operator acknowledgment field",
+        "accessLevel": "ReadWrite"
+      },
+      {
+        "name": "User_Verify",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "Operator verification field",
+        "accessLevel": "ReadWrite"
+      }
+    ]
+  }
+}

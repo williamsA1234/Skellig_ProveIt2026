@@ -1,0 +1,99 @@
+{
+  "profileName": "DI_V1",
+  "version": "1.0.0",
+  "description": "Digital input instrument profile with bad quality detection. Used for discrete status feedback signals (e.g., limit switches, proximity sensors, confirmation signals) where only a boolean read is required.",
+  "applicableTo": "Instruments with digital input feedback only (DI)",
+  "ignitionUdtSource": "Core/DI",
+  "Device_Core": {
+    "description": "Equipment identity and context metadata",
+    "attributes": [
+      {
+        "name": "TagName",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "ISA-5.1 instrument tag identifier"
+      },
+      {
+        "name": "ShortName",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "Human-readable equipment name used in UNS topic path"
+      },
+      {
+        "name": "ProfileDefinition",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "URL to the SM Profile definition that this instance conforms to"
+      },
+      {
+        "name": "Description",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "Free-text description of the equipment instance"
+      },
+      {
+        "name": "Area",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "ISA-95 area designation"
+      },
+      {
+        "name": "Unit",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "ISA-95 unit designation"
+      }
+    ]
+  },
+  "IO": {
+    "description": "Process I/O - single digital input bound to field instrument via MQTT",
+    "attributes": [
+      {
+        "name": "DI_Feedback",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Digital status feedback from field instrument (true = active/on)",
+        "accessLevel": "Read"
+      }
+    ]
+  },
+  "Parameters": {
+    "description": "Configurable parameters for alarm enables and operating modes",
+    "attributes": [
+      {
+        "name": "DI_Bad_Alarm_Enab",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Enable/disable bad quality alarm on digital input",
+        "defaultValue": false
+      },
+      {
+        "name": "Maintenance",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Equipment is in maintenance mode",
+        "defaultValue": false
+      },
+      {
+        "name": "OOS",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Equipment is out of service",
+        "defaultValue": false
+      }
+    ]
+  },
+  "Alarms": {
+    "description": "Alarm conditions: bad quality on DI",
+    "attributes": [
+      {
+        "name": "DI_Bad_Quality",
+        "alarmType": "opc:OffNormalAlarmType",
+        "condition": "DI_Feedback quality is Bad",
+        "priority": "High",
+        "enabledBy": "Parameters.DI_Bad_Alarm_Enab",
+        "description": "Digital input has bad data quality (communication loss)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "profileName": "DO_V1",
+  "version": "1.0.0",
+  "description": "Digital output instrument profile with bad quality detection. Used for discrete command outputs (e.g., on/off valves, solenoids, pump start/stop) where only a boolean write is required. Includes Mode parameter and Bypass capability.",
+  "applicableTo": "Instruments with digital command output only (DO)",
+  "ignitionUdtSource": "Core/DO",
+  "Device_Core": {
+    "description": "Equipment identity and context metadata",
+    "attributes": [
+      {
+        "name": "TagName",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "ISA-5.1 instrument tag identifier"
+      },
+      {
+        "name": "ShortName",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "Human-readable equipment name used in UNS topic path"
+      },
+      {
+        "name": "ProfileDefinition",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "URL to the SM Profile definition that this instance conforms to"
+      },
+      {
+        "name": "Description",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "Free-text description of the equipment instance"
+      },
+      {
+        "name": "Area",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "ISA-95 area designation"
+      },
+      {
+        "name": "Unit",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "ISA-95 unit designation"
+      }
+    ]
+  },
+  "IO": {
+    "description": "Process I/O - single digital output command bound to field instrument via MQTT",
+    "attributes": [
+      {
+        "name": "DO_Command",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Digital command setpoint sent to field instrument (true = on/open)",
+        "accessLevel": "ReadWrite"
+      }
+    ]
+  },
+  "Parameters": {
+    "description": "Configurable parameters for alarm enables, operating modes, and bypass",
+    "attributes": [
+      {
+        "name": "DO_Bad_Alarm_Enab",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Enable/disable bad quality alarm on digital output",
+        "defaultValue": false
+      },
+      {
+        "name": "Mode",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "Operating mode (e.g., Null, CAS, MAN)",
+        "defaultValue": "Null"
+      },
+      {
+        "name": "Bypass",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Output is bypassed (ignored by control logic)",
+        "defaultValue": false
+      },
+      {
+        "name": "Operator",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Operator acknowledgment or manual override flag",
+        "defaultValue": false
+      },
+      {
+        "name": "Maintenance",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Equipment is in maintenance mode",
+        "defaultValue": false
+      },
+      {
+        "name": "OOS",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Equipment is out of service",
+        "defaultValue": false
+      },
+      {
+        "name": "Interlocked",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Equipment is interlocked (prevented from operating)",
+        "defaultValue": false
+      },
+      {
+        "name": "ResetReq",
+        "dataType": "opc:Boolean",
+        "nodeId": "i=1",
+        "description": "Reset request flag (clear alarm or fault condition)",
+        "defaultValue": false
+      }
+    ]
+  },
+  "Alarms": {
+    "description": "Alarm conditions: bad quality on DO; ESTOP",
+    "attributes": [
+      {
+        "name": "DO_Bad_Quality",
+        "alarmType": "opc:OffNormalAlarmType",
+        "condition": "DO_Command quality is Bad",
+        "priority": "High",
+        "enabledBy": "Parameters.DO_Bad_Alarm_Enab",
+        "description": "Digital output has bad data quality (communication loss)"
+      },
+      {
+        "name": "ESTOP",
+        "alarmType": "opc:OffNormalAlarmType",
+        "condition": "ESTOP == true",
+        "priority": "Critical",
+        "enabledBy": "always",
+        "description": "Emergency stop activated"
+      }
+    ]
+  }
+}

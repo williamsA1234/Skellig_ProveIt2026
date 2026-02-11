@@ -1,0 +1,48 @@
+{
+  "profileName": "DeviceCore_V1",
+  "version": "1.0.0",
+  "description": "Base device identity and context metadata UDT. Provides ISA-95 location context (Area, Unit), ISA-5.1 tag identification, and a link to the SM Profile definition. Used as a nested UDT instance inside all instrument and equipment profiles.",
+  "applicableTo": "All equipment types requiring standard identification and context metadata",
+  "ignitionUdtSource": "Core/DeviceCore",
+  "Device_Core": {
+    "description": "Equipment identity and context metadata",
+    "attributes": [
+      {
+        "name": "TagName",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "ISA-5.1 instrument tag identifier (e.g., XV-250-001)"
+      },
+      {
+        "name": "ShortName",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "Human-readable equipment name used in UNS topic path (e.g., Harvest Valve)"
+      },
+      {
+        "name": "ProfileDefinition",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "URL to the SM Profile definition that this instance conforms to"
+      },
+      {
+        "name": "Description",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "Free-text description of the equipment instance"
+      },
+      {
+        "name": "Area",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "ISA-95 area designation (e.g., Cell_Culture)"
+      },
+      {
+        "name": "Unit",
+        "dataType": "opc:String",
+        "nodeId": "i=12",
+        "description": "ISA-95 unit designation (e.g., SUB-250)"
+      }
+    ]
+  }
+}
