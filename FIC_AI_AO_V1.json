@@ -191,63 +191,90 @@
     ]
   },
   "Alarms": {
-    "description": "Alarm conditions: four-level limit alarms on Flow_PV; bad quality on AI, AO; ESTOP",
+    "description": "Reference tags for Ignition alarm evaluation. Each tag's value mirrors an IO process variable that an Ignition alarm property evaluates against. Alarm active/inactive state is not published in this profile version.",
     "attributes": [
       {
         "name": "High_High",
-        "alarmType": "opc:LimitAlarmType",
-        "condition": "Flow_PV > Parameters.High_High_Sp",
-        "priority": "High",
-        "enabledBy": "Parameters.High_High_Enab",
-        "description": "Flow_PV exceeds high-high limit"
+        "dataType": "opc:Float",
+        "sourceTag": "IO.Flow_PV",
+        "description": "Reference tag evaluating to Flow_PV PV for Ignition alarm evaluation",
+        "ignitionAlarm": {
+          "mode": "AboveValue",
+          "priority": "High",
+          "setpoint": "Parameters.High_High_Sp",
+          "enabledBy": "Parameters.High_High_Enab"
+        }
       },
       {
         "name": "High",
-        "alarmType": "opc:LimitAlarmType",
-        "condition": "Flow_PV > Parameters.High_Sp",
-        "priority": "Low",
-        "enabledBy": "Parameters.High_Enab",
-        "description": "Flow_PV exceeds high limit"
+        "dataType": "opc:Float",
+        "sourceTag": "IO.Flow_PV",
+        "description": "Reference tag evaluating to Flow_PV PV for Ignition alarm evaluation",
+        "ignitionAlarm": {
+          "mode": "AboveValue",
+          "priority": "Low",
+          "setpoint": "Parameters.High_Sp",
+          "enabledBy": "Parameters.High_Enab"
+        }
       },
       {
         "name": "Low",
-        "alarmType": "opc:LimitAlarmType",
-        "condition": "Flow_PV < Parameters.Low_Sp",
-        "priority": "Low",
-        "enabledBy": "Parameters.Low_Enab",
-        "description": "Flow_PV falls below low limit"
+        "dataType": "opc:Float",
+        "sourceTag": "IO.Flow_PV",
+        "description": "Reference tag evaluating to Flow_PV PV for Ignition alarm evaluation",
+        "ignitionAlarm": {
+          "mode": "BelowValue",
+          "priority": "Low",
+          "setpoint": "Parameters.Low_Sp",
+          "enabledBy": "Parameters.Low_Enab"
+        }
       },
       {
         "name": "Low_Low",
-        "alarmType": "opc:LimitAlarmType",
-        "condition": "Flow_PV < Parameters.Low_Low_Sp",
-        "priority": "High",
-        "enabledBy": "Parameters.Low_Low_Enab",
-        "description": "Flow_PV falls below low-low limit"
+        "dataType": "opc:Float",
+        "sourceTag": "IO.Flow_PV",
+        "description": "Reference tag evaluating to Flow_PV PV for Ignition alarm evaluation",
+        "ignitionAlarm": {
+          "mode": "BelowValue",
+          "priority": "High",
+          "setpoint": "Parameters.Low_Low_Sp",
+          "enabledBy": "Parameters.Low_Low_Enab"
+        }
       },
       {
         "name": "AI_Bad_Quality",
-        "alarmType": "opc:OffNormalAlarmType",
-        "condition": "Flow_PV quality is Bad",
-        "priority": "High",
-        "enabledBy": "Parameters.AI_Bad_Alarm_Enab",
-        "description": "Analog input (pv) has bad data quality (communication loss)"
+        "dataType": "opc:Float",
+        "sourceTag": "IO.Flow_PV",
+        "description": "Reference tag evaluating to Flow_PV PV for Ignition bad quality alarm evaluation",
+        "ignitionAlarm": {
+          "mode": "BadQuality",
+          "priority": "High",
+          "enabledBy": "Parameters.AI_Bad_Alarm_Enab"
+        }
       },
       {
         "name": "AO_Bad_Quality",
-        "alarmType": "opc:OffNormalAlarmType",
-        "condition": "Flow_SP quality is Bad",
-        "priority": "High",
-        "enabledBy": "Parameters.AO_Bad_Alarm_Enab",
-        "description": "Analog output (sp) has bad data quality (communication loss)"
+        "dataType": "opc:Float",
+        "sourceTag": "IO.Flow_SP",
+        "description": "Reference tag evaluating to Flow_SP for Ignition bad quality alarm evaluation",
+        "ignitionAlarm": {
+          "mode": "BadQuality",
+          "priority": "High",
+          "enabledBy": "Parameters.AO_Bad_Alarm_Enab"
+        }
       },
       {
         "name": "ESTOP",
-        "alarmType": "opc:OffNormalAlarmType",
-        "condition": "ESTOP == true",
-        "priority": "Critical",
-        "enabledBy": "always",
-        "description": "Emergency stop activated"
+        "dataType": "opc:Boolean",
+        "sourceTag": "memory",
+        "description": "Memory tag for Ignition ESTOP alarm evaluation",
+        "defaultValue": false,
+        "ignitionAlarm": {
+          "mode": "EqualValue",
+          "priority": "Critical",
+          "setpoint": true,
+          "enabledBy": "always"
+        }
       }
     ]
   }

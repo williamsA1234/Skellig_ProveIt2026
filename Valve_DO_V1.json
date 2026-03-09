@@ -4,7 +4,6 @@
   "description": "On/off valve with digital output command (open/close). Includes bad quality detection and ESTOP. Used for isolation valves, drain valves, and similar binary-position valves in single-use bioprocessing systems.",
   "applicableTo": "Binary on/off valves controlled via digital output (DO)",
   "ignitionUdtSource": "ProveIt/Valve_DO",
-
   "Device_Core": {
     "description": "Equipment identity and context metadata",
     "attributes": [
@@ -46,7 +45,6 @@
       }
     ]
   },
-
   "IO": {
     "description": "Process I/O - digital output command bound to field instrument via MQTT",
     "attributes": [
@@ -60,7 +58,6 @@
       }
     ]
   },
-
   "Parameters": {
     "description": "Configurable parameters for operating modes and alarm enables",
     "attributes": [
@@ -122,25 +119,32 @@
       }
     ]
   },
-
   "Alarms": {
-    "description": "Alarm conditions for the valve. No limit alarms (digital output has no PV to evaluate against thresholds).",
+    "description": "Reference tags for Ignition alarm evaluation. Each tag's value mirrors an IO process variable that an Ignition alarm property evaluates against. Alarm active/inactive state is not published in this profile version.",
     "attributes": [
       {
         "name": "DO_Bad_Quality",
-        "alarmType": "opc:OffNormalAlarmType",
-        "condition": "Valve_Position_SP quality is Bad",
-        "priority": "High",
-        "enabledBy": "Parameters.DO_Bad_Alarm_Enab",
-        "description": "Valve command output has bad data quality (communication loss)"
+        "dataType": "opc:Boolean",
+        "sourceTag": "IO.Valve_Position_SP",
+        "description": "Reference tag evaluating to Valve_Position_SP for Ignition bad quality alarm evaluation",
+        "ignitionAlarm": {
+          "mode": "BadQuality",
+          "priority": "High",
+          "enabledBy": "Parameters.DO_Bad_Alarm_Enab"
+        }
       },
       {
         "name": "ESTOP",
-        "alarmType": "opc:OffNormalAlarmType",
-        "condition": "ESTOP == true",
-        "priority": "Critical",
-        "enabledBy": "always",
-        "description": "Emergency stop activated"
+        "dataType": "opc:Boolean",
+        "sourceTag": "memory",
+        "description": "Memory tag for Ignition ESTOP alarm evaluation",
+        "defaultValue": false,
+        "ignitionAlarm": {
+          "mode": "EqualValue",
+          "priority": "Critical",
+          "setpoint": true,
+          "enabledBy": "always"
+        }
       }
     ]
   }

@@ -119,23 +119,31 @@
     ]
   },
   "Alarms": {
-    "description": "Alarm conditions: bad quality on DO; ESTOP",
+    "description": "Reference tags for Ignition alarm evaluation. Each tag's value mirrors an IO process variable that an Ignition alarm property evaluates against. Alarm active/inactive state is not published in this profile version.",
     "attributes": [
       {
         "name": "DO_Bad_Quality",
-        "alarmType": "opc:OffNormalAlarmType",
-        "condition": "DO_Command quality is Bad",
-        "priority": "High",
-        "enabledBy": "Parameters.DO_Bad_Alarm_Enab",
-        "description": "Digital output has bad data quality (communication loss)"
+        "dataType": "opc:Boolean",
+        "sourceTag": "IO.DO_Command",
+        "description": "Reference tag evaluating to DO_Command for Ignition bad quality alarm evaluation",
+        "ignitionAlarm": {
+          "mode": "BadQuality",
+          "priority": "High",
+          "enabledBy": "Parameters.DO_Bad_Alarm_Enab"
+        }
       },
       {
         "name": "ESTOP",
-        "alarmType": "opc:OffNormalAlarmType",
-        "condition": "ESTOP == true",
-        "priority": "Critical",
-        "enabledBy": "always",
-        "description": "Emergency stop activated"
+        "dataType": "opc:Boolean",
+        "sourceTag": "memory",
+        "description": "Memory tag for Ignition ESTOP alarm evaluation",
+        "defaultValue": false,
+        "ignitionAlarm": {
+          "mode": "EqualValue",
+          "priority": "Critical",
+          "setpoint": true,
+          "enabledBy": "always"
+        }
       }
     ]
   }

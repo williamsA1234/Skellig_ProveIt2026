@@ -219,79 +219,112 @@
     ]
   },
   "Alarms": {
-    "description": "Alarm conditions: four-level limit alarms on AI_Feedback; bad quality on AI, AO, DI, DO; ESTOP",
+    "description": "Reference tags for Ignition alarm evaluation. Each tag's value mirrors an IO process variable that an Ignition alarm property evaluates against. Alarm active/inactive state is not published in this profile version.",
     "attributes": [
       {
         "name": "High_High",
-        "alarmType": "opc:LimitAlarmType",
-        "condition": "AI_Feedback > Parameters.High_High_Sp",
-        "priority": "High",
-        "enabledBy": "Parameters.High_High_Enab",
-        "description": "AI_Feedback exceeds high-high limit"
+        "dataType": "opc:Float",
+        "sourceTag": "IO.AI_Feedback",
+        "description": "Reference tag evaluating to AI_Feedback PV for Ignition alarm evaluation",
+        "ignitionAlarm": {
+          "mode": "AboveValue",
+          "priority": "High",
+          "setpoint": "Parameters.High_High_Sp",
+          "enabledBy": "Parameters.High_High_Enab"
+        }
       },
       {
         "name": "High",
-        "alarmType": "opc:LimitAlarmType",
-        "condition": "AI_Feedback > Parameters.High_Sp",
-        "priority": "Low",
-        "enabledBy": "Parameters.High_Enab",
-        "description": "AI_Feedback exceeds high limit"
+        "dataType": "opc:Float",
+        "sourceTag": "IO.AI_Feedback",
+        "description": "Reference tag evaluating to AI_Feedback PV for Ignition alarm evaluation",
+        "ignitionAlarm": {
+          "mode": "AboveValue",
+          "priority": "Low",
+          "setpoint": "Parameters.High_Sp",
+          "enabledBy": "Parameters.High_Enab"
+        }
       },
       {
         "name": "Low",
-        "alarmType": "opc:LimitAlarmType",
-        "condition": "AI_Feedback < Parameters.Low_Sp",
-        "priority": "Low",
-        "enabledBy": "Parameters.Low_Enab",
-        "description": "AI_Feedback falls below low limit"
+        "dataType": "opc:Float",
+        "sourceTag": "IO.AI_Feedback",
+        "description": "Reference tag evaluating to AI_Feedback PV for Ignition alarm evaluation",
+        "ignitionAlarm": {
+          "mode": "BelowValue",
+          "priority": "Low",
+          "setpoint": "Parameters.Low_Sp",
+          "enabledBy": "Parameters.Low_Enab"
+        }
       },
       {
         "name": "Low_Low",
-        "alarmType": "opc:LimitAlarmType",
-        "condition": "AI_Feedback < Parameters.Low_Low_Sp",
-        "priority": "High",
-        "enabledBy": "Parameters.Low_Low_Enab",
-        "description": "AI_Feedback falls below low-low limit"
+        "dataType": "opc:Float",
+        "sourceTag": "IO.AI_Feedback",
+        "description": "Reference tag evaluating to AI_Feedback PV for Ignition alarm evaluation",
+        "ignitionAlarm": {
+          "mode": "BelowValue",
+          "priority": "High",
+          "setpoint": "Parameters.Low_Low_Sp",
+          "enabledBy": "Parameters.Low_Low_Enab"
+        }
       },
       {
         "name": "AI_Bad_Quality",
-        "alarmType": "opc:OffNormalAlarmType",
-        "condition": "AI_Feedback quality is Bad",
-        "priority": "High",
-        "enabledBy": "Parameters.AI_Bad_Alarm_Enab",
-        "description": "Analog input has bad data quality (communication loss)"
+        "dataType": "opc:Float",
+        "sourceTag": "IO.AI_Feedback",
+        "description": "Reference tag evaluating to AI_Feedback PV for Ignition bad quality alarm evaluation",
+        "ignitionAlarm": {
+          "mode": "BadQuality",
+          "priority": "High",
+          "enabledBy": "Parameters.AI_Bad_Alarm_Enab"
+        }
       },
       {
         "name": "AO_Bad_Quality",
-        "alarmType": "opc:OffNormalAlarmType",
-        "condition": "AO_Command quality is Bad",
-        "priority": "High",
-        "enabledBy": "Parameters.AO_Bad_Alarm_Enab",
-        "description": "Analog output has bad data quality (communication loss)"
+        "dataType": "opc:Float",
+        "sourceTag": "IO.AO_Command",
+        "description": "Reference tag evaluating to AO_Command for Ignition bad quality alarm evaluation",
+        "ignitionAlarm": {
+          "mode": "BadQuality",
+          "priority": "High",
+          "enabledBy": "Parameters.AO_Bad_Alarm_Enab"
+        }
       },
       {
         "name": "DI_Bad_Quality",
-        "alarmType": "opc:OffNormalAlarmType",
-        "condition": "DI_Feedback quality is Bad",
-        "priority": "High",
-        "enabledBy": "Parameters.DI_Bad_Alarm_Enab",
-        "description": "Digital input has bad data quality (communication loss)"
+        "dataType": "opc:Boolean",
+        "sourceTag": "IO.DI_Feedback",
+        "description": "Reference tag evaluating to DI_Feedback for Ignition bad quality alarm evaluation",
+        "ignitionAlarm": {
+          "mode": "BadQuality",
+          "priority": "High",
+          "enabledBy": "Parameters.DI_Bad_Alarm_Enab"
+        }
       },
       {
         "name": "DO_Bad_Quality",
-        "alarmType": "opc:OffNormalAlarmType",
-        "condition": "DO_Command quality is Bad",
-        "priority": "High",
-        "enabledBy": "Parameters.DO_Bad_Alarm_Enab",
-        "description": "Digital output has bad data quality (communication loss)"
+        "dataType": "opc:Boolean",
+        "sourceTag": "IO.DO_Command",
+        "description": "Reference tag evaluating to DO_Command for Ignition bad quality alarm evaluation",
+        "ignitionAlarm": {
+          "mode": "BadQuality",
+          "priority": "High",
+          "enabledBy": "Parameters.DO_Bad_Alarm_Enab"
+        }
       },
       {
         "name": "ESTOP",
-        "alarmType": "opc:OffNormalAlarmType",
-        "condition": "ESTOP == true",
-        "priority": "Critical",
-        "enabledBy": "always",
-        "description": "Emergency stop activated"
+        "dataType": "opc:Boolean",
+        "sourceTag": "memory",
+        "description": "Memory tag for Ignition ESTOP alarm evaluation",
+        "defaultValue": false,
+        "ignitionAlarm": {
+          "mode": "EqualValue",
+          "priority": "Critical",
+          "setpoint": true,
+          "enabledBy": "always"
+        }
       }
     ]
   }

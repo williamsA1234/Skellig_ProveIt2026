@@ -1,0 +1,3314 @@
+{
+  "name": "Core",
+  "tagType": "Folder",
+  "tags": [
+    {
+      "name": "AI_AO",
+      "tagType": "UdtType",
+      "tags": [
+        {
+          "name": "Alarms",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "alarms": [
+                {
+                  "mode": "BadQuality",
+                  "name": "Bad",
+                  "priority": "High"
+                }
+              ],
+              "expression": "if(\r\n  {[.]../IO/AO_Command/Simulate},\r\n  {[.]../IO/AO_Command/Simulate_Value},\r\n  {[.]../IO/AO_Command/Setpoint}\r\n)\r\n",
+              "name": "AO_Bad_Quality",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "BelowValue",
+                  "name": "Low",
+                  "priority": "Low",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/Low_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "Low",
+              "sourceTagPath": {
+                "bindType": "parameter",
+                "binding": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)"
+              },
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "AboveValue",
+                  "name": "High",
+                  "priority": "Low",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/High_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "High",
+              "sourceTagPath": "[.]../IO/AI_Feedback/Value",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarms": [
+                {
+                  "mode": "BadQuality",
+                  "name": "Bad",
+                  "priority": "High"
+                }
+              ],
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "AI_Bad_Quality",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarms": [
+                {
+                  "name": "ESTOP",
+                  "priority": "Critical",
+                  "setpointA": 1.0
+                }
+              ],
+              "dataType": "Boolean",
+              "name": "ESTOP",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "AboveValue",
+                  "name": "High_High",
+                  "priority": "High",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/High_High_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "High_High",
+              "sourceTagPath": {
+                "bindType": "parameter",
+                "binding": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)"
+              },
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "BelowValue",
+                  "name": "Low_Low",
+                  "priority": "High",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/Low_Low_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "Low_Low",
+              "sourceTagPath": {
+                "bindType": "parameter",
+                "binding": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)"
+              },
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            }
+          ]
+        },
+        {
+          "name": "Device_Core",
+          "tagType": "UdtInstance",
+          "tags": [
+            {
+              "name": "ShortName",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "Area",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "Description",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "Unit",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "TagName",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "ProfileDefinition",
+              "tagType": "AtomicTag",
+              "value": "https://raw.githubusercontent.com/williamsA1234/Skellig_ProveIt2026/main/AI_AO_V1.json"
+            }
+          ],
+          "typeId": "Core/DeviceCore"
+        },
+        {
+          "name": "Parameters",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/AO_Bad_Quality.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "AO_Bad_Alarm_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "Maintenance",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\t\n\talarm_eval_path = \"[.]../Alarms/Low.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "Low_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/High.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "High_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "name": "High_High_Sp",
+              "tagType": "AtomicTag",
+              "value": 100,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "ResetReq",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "Operator",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "Out_Max",
+              "tagType": "AtomicTag",
+              "value": 100.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/AI_Bad_Quality.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "AI_Bad_Alarm_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "name": "Low_Low_Sp",
+              "tagType": "AtomicTag",
+              "value": 30,
+              "valueSource": "memory"
+            },
+            {
+              "name": "Low_Sp",
+              "tagType": "AtomicTag",
+              "value": 10,
+              "valueSource": "memory"
+            },
+            {
+              "name": "High_Sp",
+              "tagType": "AtomicTag",
+              "value": 90,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "Out_Min",
+              "tagType": "AtomicTag",
+              "value": 0.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\t\n\talarm_eval_path = \"[.]../Alarms/Low_Low.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "Low_Low_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "Interlocked",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "OOS",
+              "tagType": "AtomicTag",
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/High_High.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "High_High_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            }
+          ]
+        },
+        {
+          "name": "IO",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "name": "AO_Command",
+              "tagType": "UdtInstance",
+              "tags": [
+                {
+                  "name": "Setpoint",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "name": "Simulate",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "name": "Simulate_Value",
+                  "tagType": "AtomicTag"
+                }
+              ],
+              "typeId": "IO/AO"
+            },
+            {
+              "name": "AI_Feedback",
+              "tagType": "UdtInstance",
+              "tags": [
+                {
+                  "name": "Value",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "name": "Simulate",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "name": "Simulate_Value",
+                  "tagType": "AtomicTag"
+                }
+              ],
+              "typeId": "IO/AI"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AI",
+      "tagType": "UdtType",
+      "tags": [
+        {
+          "name": "Device_Core",
+          "tagType": "UdtInstance",
+          "tags": [
+            {
+              "name": "Unit",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "Area",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "ProfileDefinition",
+              "tagType": "AtomicTag",
+              "value": "https://raw.githubusercontent.com/williamsA1234/Skellig_ProveIt2026/main/AI_V1.json"
+            },
+            {
+              "name": "ShortName",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "TagName",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "Description",
+              "tagType": "AtomicTag"
+            }
+          ],
+          "typeId": "Core/DeviceCore"
+        },
+        {
+          "name": "Parameters",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/High_High.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "High_High_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "Low_Sp",
+              "tagType": "AtomicTag",
+              "value": 10.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "High_High_Sp",
+              "tagType": "AtomicTag",
+              "value": 100.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "Out_Max",
+              "tagType": "AtomicTag",
+              "value": 100.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/High.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "High_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "Maintenance",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "OOS",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\t\n\talarm_eval_path = \"[.]../Alarms/Low_Low.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "Low_Low_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "High_Sp",
+              "tagType": "AtomicTag",
+              "value": 90.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "Low_Low_Sp",
+              "tagType": "AtomicTag",
+              "value": 5.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "Out_Min",
+              "tagType": "AtomicTag",
+              "value": 0.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/AI_Bad_Quality.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "AI_Bad_Alarm_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "Operator",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\t\n\talarm_eval_path = \"[.]../Alarms/Low.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "Low_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            }
+          ]
+        },
+        {
+          "name": "Alarms",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "AboveValue",
+                  "name": "High_High",
+                  "priority": "High",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/High_High_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "High_High",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "AboveValue",
+                  "name": "High",
+                  "priority": "Low",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/High_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "High",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarms": [
+                {
+                  "mode": "BadQuality",
+                  "name": "Bad",
+                  "priority": "High"
+                }
+              ],
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "AI_Bad_Quality",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "BelowValue",
+                  "name": "Low_Low",
+                  "priority": "High",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/Low_Low_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "Low_Low",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "BelowValue",
+                  "name": "Low",
+                  "priority": "Low",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/Low_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "Low",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            }
+          ]
+        },
+        {
+          "name": "IO",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "name": "AI_Feedback",
+              "tagType": "UdtInstance",
+              "tags": [
+                {
+                  "dataType": "Float4",
+                  "name": "Simulate_Value",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "engUnit": "eng_unit",
+                  "name": "Value",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "dataType": "Boolean",
+                  "name": "Simulate",
+                  "tagType": "AtomicTag"
+                }
+              ],
+              "typeId": "IO/AI"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AI_AO_DO_M",
+      "tagType": "UdtType",
+      "tags": [
+        {
+          "name": "Parameters",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/Low_Low.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "Low_Low_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "Operator",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/AI_Bad_Quality.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "AI_Bad_Alarm_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "Out_Min",
+              "tagType": "AtomicTag",
+              "value": 0.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/AO_Bad_Quality.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "AO_Bad_Alarm_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "OOS",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "Low_Low_Sp",
+              "tagType": "AtomicTag",
+              "value": 5.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "Maintenance",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "ResetReq",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "Out_Max",
+              "tagType": "AtomicTag",
+              "value": 100.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/DO_Bad_Quality.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "DO_Bad_Alarm_Enab",
+              "tagType": "AtomicTag",
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "Interlocked",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "String",
+              "name": "Mode",
+              "tagType": "AtomicTag",
+              "value": "CAS",
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "Low_Sp",
+              "tagType": "AtomicTag",
+              "value": 10.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/High_High.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "High_High_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/Low.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "Low_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "High_High_Sp",
+              "tagType": "AtomicTag",
+              "value": 100.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/High.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "High_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "High_Sp",
+              "tagType": "AtomicTag",
+              "value": 90.0,
+              "valueSource": "memory"
+            }
+          ]
+        },
+        {
+          "name": "IO",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "name": "AO_Command",
+              "tagType": "UdtInstance",
+              "tags": [
+                {
+                  "dataType": "Boolean",
+                  "name": "Simulate",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "dataType": "Float4",
+                  "name": "Simulate_Value",
+                  "tagType": "AtomicTag",
+                  "value": 0.0
+                },
+                {
+                  "name": "Setpoint",
+                  "tagType": "AtomicTag"
+                }
+              ],
+              "typeId": "IO/AO"
+            },
+            {
+              "name": "AI_Feedback",
+              "tagType": "UdtInstance",
+              "tags": [
+                {
+                  "name": "Value",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "dataType": "Boolean",
+                  "name": "Simulate",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "dataType": "Float4",
+                  "name": "Simulate_Value",
+                  "tagType": "AtomicTag"
+                }
+              ],
+              "typeId": "IO/AI"
+            },
+            {
+              "name": "DO_Command",
+              "tagType": "UdtInstance",
+              "tags": [
+                {
+                  "dataType": "Boolean",
+                  "name": "Simulate_Value",
+                  "tagType": "AtomicTag",
+                  "value": false,
+                  "valueSource": "memory"
+                },
+                {
+                  "name": "Simulate",
+                  "tagType": "AtomicTag",
+                  "value": false,
+                  "valueSource": "memory"
+                },
+                {
+                  "name": "Setpoint",
+                  "tagType": "AtomicTag"
+                }
+              ],
+              "typeId": "IO/DO"
+            }
+          ]
+        },
+        {
+          "name": "Device_Core",
+          "tagType": "UdtInstance",
+          "tags": [
+            {
+              "name": "Unit",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "Description",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "ProfileDefinition",
+              "tagType": "AtomicTag",
+              "value": "https://raw.githubusercontent.com/williamsA1234/Skellig_ProveIt2026/main/AI_AO_DO_M_V1.json"
+            },
+            {
+              "name": "TagName",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "Area",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "ShortName",
+              "tagType": "AtomicTag"
+            }
+          ],
+          "typeId": "Core/DeviceCore"
+        },
+        {
+          "name": "Alarms",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "alarms": [
+                {
+                  "mode": "BadQuality",
+                  "name": "Bad",
+                  "priority": "High"
+                }
+              ],
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "AI_Bad_Quality",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarms": [
+                {
+                  "name": "ESTOP",
+                  "priority": "Critical",
+                  "setpointA": 1.0
+                }
+              ],
+              "dataType": "Boolean",
+              "name": "ESTOP",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "BelowValue",
+                  "name": "Low_Low",
+                  "priority": "High",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/Low_Low_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "Low_Low",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "AboveValue",
+                  "name": "High_High",
+                  "priority": "High",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/High_High_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "High_High",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarms": [
+                {
+                  "mode": "BadQuality",
+                  "name": "Bad",
+                  "priority": "High"
+                }
+              ],
+              "expression": "if(\r\n  {[.]../IO/AO_Command/Simulate},\r\n  {[.]../IO/AO_Command/Simulate_Value},\r\n  {[.]../IO/AO_Command/Setpoint}\r\n)\r\n",
+              "name": "AO_Bad_Quality",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarms": [
+                {
+                  "mode": "BadQuality",
+                  "name": "Bad",
+                  "priority": "High"
+                }
+              ],
+              "expression": "if(\r\n  {[.]../IO/DO_Command/Simulate},\r\n  {[.]../IO/DO_Command/Simulate_Value},\r\n  {[.]../IO/DO_Command/Setpoint}\r\n)\r\n",
+              "name": "DO_Bad_Quality",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "BelowValue",
+                  "name": "Low",
+                  "priority": "Low",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/Low_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "Low",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "AboveValue",
+                  "name": "High",
+                  "priority": "Low",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/High_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "High",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DO",
+      "tagType": "UdtType",
+      "tags": [
+        {
+          "name": "Device_Core",
+          "tagType": "UdtInstance",
+          "tags": [
+            {
+              "name": "ShortName",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "TagName",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "Unit",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "Area",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "ProfileDefinition",
+              "tagType": "AtomicTag",
+              "value": "https://raw.githubusercontent.com/williamsA1234/Skellig_ProveIt2026/main/DO_V1.json"
+            },
+            {
+              "name": "Description",
+              "tagType": "AtomicTag"
+            }
+          ],
+          "typeId": "Core/DeviceCore"
+        },
+        {
+          "name": "Alarms",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "alarms": [
+                {
+                  "name": "ESTOP",
+                  "priority": "Critical",
+                  "setpointA": 1.0
+                }
+              ],
+              "dataType": "Boolean",
+              "name": "ESTOP",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "alarms": [
+                {
+                  "mode": "BadQuality",
+                  "name": "Bad",
+                  "priority": "High"
+                }
+              ],
+              "expression": "if(\r\n  {[.]../IO/DO_Command/Simulate},\r\n  {[.]../IO/DO_Command/Simulate_Value},\r\n  {[.]../IO/DO_Command/Setpoint}\r\n)\r\n",
+              "name": "DO_Bad_Quality",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            }
+          ]
+        },
+        {
+          "name": "IO",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "name": "DO_Command",
+              "tagType": "UdtInstance",
+              "tags": [
+                {
+                  "dataType": "Boolean",
+                  "name": "Simulate_Value",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "name": "Setpoint",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "dataType": "Boolean",
+                  "name": "Simulate",
+                  "tagType": "AtomicTag"
+                }
+              ],
+              "typeId": "IO/DO"
+            }
+          ]
+        },
+        {
+          "name": "Parameters",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "dataType": "Boolean",
+              "name": "Operator",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "Interlocked",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "Bypass",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "OOS",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "ResetReq",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "Maintenance",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/DO_Bad_Quality.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "DO_Bad_Alarm_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "String",
+              "name": "Mode",
+              "tagType": "AtomicTag",
+              "value": "Null",
+              "valueSource": "memory"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DI",
+      "tagType": "UdtType",
+      "tags": [
+        {
+          "name": "Alarms",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "alarms": [
+                {
+                  "mode": "BadQuality",
+                  "name": "Bad",
+                  "priority": "High"
+                }
+              ],
+              "expression": "if(\r\n  {[.]../IO/DI_Feedback/Simulate},\r\n  {[.]../IO/DI_Feedback/Simulate_Value},\r\n  {[.]../IO/DI_Feedback/Value}\r\n)\r\n",
+              "name": "DI_Bad_Quality",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            }
+          ]
+        },
+        {
+          "name": "IO",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "name": "DI_Feedback",
+              "tagType": "UdtInstance",
+              "tags": [
+                {
+                  "dataType": "Boolean",
+                  "name": "Simulate_Value",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "dataType": "Boolean",
+                  "name": "Simulate",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "name": "Value",
+                  "tagType": "AtomicTag"
+                }
+              ],
+              "typeId": "IO/DI"
+            }
+          ]
+        },
+        {
+          "name": "Parameters",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "dataType": "Boolean",
+              "name": "OOS",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/DI_Bad_Quality.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "DI_Bad_Alarm_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "Maintenance",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            }
+          ]
+        },
+        {
+          "name": "Device_Core",
+          "tagType": "UdtInstance",
+          "tags": [
+            {
+              "name": "ShortName",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "TagName",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "Unit",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "Area",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "ProfileDefinition",
+              "tagType": "AtomicTag",
+              "value": "https://raw.githubusercontent.com/williamsA1234/Skellig_ProveIt2026/main/DI_V1.json"
+            },
+            {
+              "name": "Description",
+              "tagType": "AtomicTag"
+            }
+          ],
+          "typeId": "Core/DeviceCore"
+        }
+      ]
+    },
+    {
+      "name": "DeviceCore",
+      "tagType": "UdtType",
+      "tags": [
+        {
+          "dataType": "String",
+          "name": "ProfileDefinition",
+          "tagType": "AtomicTag",
+          "valueSource": "memory",
+          "value": "https://raw.githubusercontent.com/williamsA1234/Skellig_ProveIt2026/main/DeviceCore_V1.json"
+        },
+        {
+          "dataType": "String",
+          "name": "ShortName",
+          "tagType": "AtomicTag",
+          "value": "short name",
+          "valueSource": "memory"
+        },
+        {
+          "dataType": "String",
+          "name": "Description",
+          "tagType": "AtomicTag",
+          "value": "description",
+          "valueSource": "memory"
+        },
+        {
+          "dataType": "String",
+          "name": "Unit",
+          "tagType": "AtomicTag",
+          "value": "unit",
+          "valueSource": "memory"
+        },
+        {
+          "dataType": "String",
+          "name": "Area",
+          "tagType": "AtomicTag",
+          "value": "area",
+          "valueSource": "memory"
+        },
+        {
+          "dataType": "String",
+          "documentation": "This corresponds to the P&ID tagname",
+          "name": "TagName",
+          "tagType": "AtomicTag",
+          "value": "tagName",
+          "valueSource": "memory"
+        }
+      ]
+    },
+    {
+      "name": "Unit",
+      "tagType": "UdtType",
+      "tags": [
+        {
+          "dataType": "String",
+          "name": "BatchID",
+          "tagType": "AtomicTag",
+          "valueSource": "opc"
+        },
+        {
+          "dataType": "String",
+          "name": "State",
+          "tagType": "AtomicTag",
+          "valueSource": "opc"
+        },
+        {
+          "dataType": "String",
+          "name": "User_Verify",
+          "tagType": "AtomicTag",
+          "valueSource": "opc"
+        },
+        {
+          "dataType": "String",
+          "name": "Formula",
+          "tagType": "AtomicTag",
+          "valueSource": "opc"
+        },
+        {
+          "dataType": "String",
+          "name": "User_Acknowledge",
+          "tagType": "AtomicTag",
+          "valueSource": "opc"
+        },
+        {
+          "name": "Device_Core",
+          "tagType": "UdtInstance",
+          "tags": [
+            {
+              "name": "ProfileDefinition",
+              "tagType": "AtomicTag",
+              "value": "https://raw.githubusercontent.com/williamsA1234/Skellig_ProveIt2026/main/Unit_V1.json"
+            },
+            {
+              "name": "Description",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "Area",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "ShortName",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "TagName",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "Unit",
+              "tagType": "AtomicTag"
+            }
+          ],
+          "typeId": "Core/DeviceCore"
+        },
+        {
+          "dataType": "String",
+          "name": "Message2",
+          "tagType": "AtomicTag",
+          "valueSource": "opc"
+        },
+        {
+          "dataType": "String",
+          "name": "Phase",
+          "tagType": "AtomicTag",
+          "valueSource": "opc"
+        },
+        {
+          "dataType": "String",
+          "name": "Recipe",
+          "tagType": "AtomicTag",
+          "valueSource": "opc"
+        },
+        {
+          "dataType": "String",
+          "name": "Message1",
+          "tagType": "AtomicTag",
+          "valueSource": "opc"
+        }
+      ],
+      "typeId": ""
+    },
+    {
+      "name": "AI_AO_DI_DO_M",
+      "tagType": "UdtType",
+      "tags": [
+        {
+          "name": "Alarms",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "AboveValue",
+                  "name": "High",
+                  "priority": "Low",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/High_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "High",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarms": [
+                {
+                  "mode": "BadQuality",
+                  "name": "Bad",
+                  "priority": "High"
+                }
+              ],
+              "expression": "if(\r\n  {[.]../IO/DI_Feedback/Simulate},\r\n  {[.]../IO/DI_Feedback/Simulate_Value},\r\n  {[.]../IO/DI_Feedback/Value}\r\n)\r\n",
+              "name": "DI_Bad_Quality",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarms": [
+                {
+                  "name": "ESTOP",
+                  "priority": "Critical",
+                  "setpointA": 1.0
+                }
+              ],
+              "dataType": "Boolean",
+              "name": "ESTOP",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "alarms": [
+                {
+                  "mode": "BadQuality",
+                  "name": "Bad",
+                  "priority": "High"
+                }
+              ],
+              "expression": "if(\r\n  {[.]../IO/AO_Command/Simulate},\r\n  {[.]../IO/AO_Command/Simulate_Value},\r\n  {[.]../IO/AO_Command/Setpoint}\r\n)\r\n",
+              "name": "AO_Bad_Quality",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "AboveValue",
+                  "name": "High_High",
+                  "priority": "High",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/High_High_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "High_High",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarms": [
+                {
+                  "mode": "BadQuality",
+                  "name": "Bad",
+                  "priority": "High"
+                }
+              ],
+              "expression": "if(\r\n  {[.]../IO/DO_Command/Simulate},\r\n  {[.]../IO/DO_Command/Simulate_Value},\r\n  {[.]../IO/DO_Command/Setpoint}\r\n)\r\n",
+              "name": "DO_Bad_Quality",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "BelowValue",
+                  "name": "Low_Low",
+                  "priority": "High",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/Low_Low_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "Low_Low",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarms": [
+                {
+                  "mode": "BadQuality",
+                  "name": "Bad",
+                  "priority": "High"
+                }
+              ],
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "AI_Bad_Quality",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "BelowValue",
+                  "name": "Low",
+                  "priority": "Low",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/Low_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "Low",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            }
+          ]
+        },
+        {
+          "name": "Device_Core",
+          "tagType": "UdtInstance",
+          "tags": [
+            {
+              "name": "ProfileDefinition",
+              "tagType": "AtomicTag",
+              "value": "https://raw.githubusercontent.com/williamsA1234/Skellig_ProveIt2026/main/AI_AO_DI_DO_M_V1.json"
+            },
+            {
+              "name": "Description",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "ShortName",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "Area",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "Unit",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "TagName",
+              "tagType": "AtomicTag"
+            }
+          ],
+          "typeId": "Core/DeviceCore"
+        },
+        {
+          "name": "IO",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "name": "AI_Feedback",
+              "tagType": "UdtInstance",
+              "tags": [
+                {
+                  "dataType": "Float4",
+                  "name": "Simulate_Value",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "name": "Value",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "dataType": "Boolean",
+                  "name": "Simulate",
+                  "tagType": "AtomicTag"
+                }
+              ],
+              "typeId": "IO/AI"
+            },
+            {
+              "name": "AO_Command",
+              "tagType": "UdtInstance",
+              "tags": [
+                {
+                  "dataType": "Float4",
+                  "name": "Simulate_Value",
+                  "tagType": "AtomicTag",
+                  "value": 0.0
+                },
+                {
+                  "dataType": "Boolean",
+                  "name": "Simulate",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "name": "Setpoint",
+                  "tagType": "AtomicTag"
+                }
+              ],
+              "typeId": "IO/AO"
+            },
+            {
+              "name": "DO_Command",
+              "tagType": "UdtInstance",
+              "tags": [
+                {
+                  "name": "Setpoint",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "name": "Simulate",
+                  "tagType": "AtomicTag",
+                  "value": false,
+                  "valueSource": "memory"
+                },
+                {
+                  "dataType": "Boolean",
+                  "name": "Simulate_Value",
+                  "tagType": "AtomicTag",
+                  "value": false,
+                  "valueSource": "memory"
+                }
+              ],
+              "typeId": "IO/DO"
+            },
+            {
+              "name": "DI_Feedback",
+              "tagType": "UdtInstance",
+              "tags": [
+                {
+                  "name": "Simulate",
+                  "tagType": "AtomicTag",
+                  "value": false,
+                  "valueSource": "memory"
+                },
+                {
+                  "name": "Value",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "dataType": "Boolean",
+                  "name": "Simulate_Value",
+                  "tagType": "AtomicTag",
+                  "value": false,
+                  "valueSource": "memory"
+                }
+              ],
+              "typeId": "IO/DI"
+            }
+          ]
+        },
+        {
+          "name": "Parameters",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "dataType": "Float4",
+              "name": "High_High_Sp",
+              "tagType": "AtomicTag",
+              "value": 100.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "String",
+              "name": "Mode",
+              "tagType": "AtomicTag",
+              "value": "CAS",
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/DO_Bad_Quality.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "DO_Bad_Alarm_Enab",
+              "tagType": "AtomicTag",
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/High_High.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "High_High_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "Maintenance",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "Out_Max",
+              "tagType": "AtomicTag",
+              "value": 100.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/AO_Bad_Quality.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "AO_Bad_Alarm_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "Low_Sp",
+              "tagType": "AtomicTag",
+              "value": 10.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "ResetReq",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/Low_Low.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "Low_Low_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "Interlocked",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "Out_Min",
+              "tagType": "AtomicTag",
+              "value": 0.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "Operator",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/DI_Bad_Quality.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "DI_Bad_Alarm_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "OOS",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "Low_Low_Sp",
+              "tagType": "AtomicTag",
+              "value": 5.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/High.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "High_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/Low.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "Low_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/AI_Bad_Quality.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "AI_Bad_Alarm_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "High_Sp",
+              "tagType": "AtomicTag",
+              "value": 90.0,
+              "valueSource": "memory"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AI_AO_DI_M",
+      "tagType": "UdtType",
+      "tags": [
+        {
+          "name": "Alarms",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "alarms": [
+                {
+                  "name": "ESTOP",
+                  "priority": "Critical",
+                  "setpointA": 1.0
+                }
+              ],
+              "dataType": "Boolean",
+              "name": "ESTOP",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "alarms": [
+                {
+                  "mode": "BadQuality",
+                  "name": "Bad",
+                  "priority": "High"
+                }
+              ],
+              "expression": "if(\r\n  {[.]../IO/DI_Feedback/Simulate},\r\n  {[.]../IO/DI_Feedback/Simulate_Value},\r\n  {[.]../IO/DI_Feedback/Value}\r\n)\r\n",
+              "name": "DI_Bad_Quality",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarms": [
+                {
+                  "mode": "BadQuality",
+                  "name": "Bad",
+                  "priority": "High"
+                }
+              ],
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "AI_Bad_Quality",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "AboveValue",
+                  "name": "High_High",
+                  "priority": "High",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/High_High_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "High_High",
+              "sourceTagPath": {
+                "bindType": "parameter",
+                "binding": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)"
+              },
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "BelowValue",
+                  "name": "Low_Low",
+                  "priority": "High",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/Low_Low_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "Low_Low",
+              "sourceTagPath": {
+                "bindType": "parameter",
+                "binding": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)"
+              },
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarms": [
+                {
+                  "mode": "BadQuality",
+                  "name": "Bad",
+                  "priority": "High"
+                }
+              ],
+              "expression": "if(\r\n  {[.]../IO/AO_Command/Simulate},\r\n  {[.]../IO/AO_Command/Simulate_Value},\r\n  {[.]../IO/AO_Command/Setpoint}\r\n)\r\n",
+              "name": "AO_Bad_Quality",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "BelowValue",
+                  "name": "Low",
+                  "priority": "Low",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/Low_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "Low",
+              "sourceTagPath": {
+                "bindType": "parameter",
+                "binding": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)"
+              },
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "AboveValue",
+                  "name": "High",
+                  "priority": "Low",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/High_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "High",
+              "sourceTagPath": "[.]../IO/AI_Feedback/Value",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            }
+          ]
+        },
+        {
+          "name": "Device_Core",
+          "tagType": "UdtInstance",
+          "tags": [
+            {
+              "name": "Unit",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "Description",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "ProfileDefinition",
+              "tagType": "AtomicTag",
+              "value": "https://raw.githubusercontent.com/williamsA1234/Skellig_ProveIt2026/main/AI_AO_DI_M_V1.json"
+            },
+            {
+              "name": "TagName",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "Area",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "ShortName",
+              "tagType": "AtomicTag"
+            }
+          ],
+          "typeId": "Core/DeviceCore"
+        },
+        {
+          "name": "Parameters",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "dataType": "Float4",
+              "name": "Out_Min",
+              "tagType": "AtomicTag",
+              "value": 0.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "Operator",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\t\n\talarm_eval_path = \"[.]../Alarms/Low_Low.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "Low_Low_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/DI_Bad_Quality.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "DI_Bad_Alarm_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/AI_Bad_Quality.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "AI_Bad_Alarm_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "name": "Low_Low_Sp",
+              "tagType": "AtomicTag",
+              "value": 30,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "OOS",
+              "tagType": "AtomicTag",
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\t\n\talarm_eval_path = \"[.]../Alarms/Low.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "Low_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "name": "High_Sp",
+              "tagType": "AtomicTag",
+              "value": 90,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/High.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "High_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "name": "High_High_Sp",
+              "tagType": "AtomicTag",
+              "value": 100,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "Out_Max",
+              "tagType": "AtomicTag",
+              "value": 100.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "Interlocked",
+              "tagType": "AtomicTag",
+              "valueSource": "memory"
+            },
+            {
+              "name": "Low_Sp",
+              "tagType": "AtomicTag",
+              "value": 10,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "String",
+              "name": "Mode",
+              "tagType": "AtomicTag",
+              "valueSource": "reference"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/High_High.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "High_High_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/AO_Bad_Quality.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "AO_Bad_Alarm_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "Maintenance",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "ResetReq",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            }
+          ]
+        },
+        {
+          "name": "IO",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "name": "AO_Command",
+              "tagType": "UdtInstance",
+              "tags": [
+                {
+                  "name": "Simulate",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "name": "Setpoint",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "name": "Simulate_Value",
+                  "tagType": "AtomicTag"
+                }
+              ],
+              "typeId": "IO/AO"
+            },
+            {
+              "name": "AI_Feedback",
+              "tagType": "UdtInstance",
+              "tags": [
+                {
+                  "name": "Value",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "name": "Simulate",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "name": "Simulate_Value",
+                  "tagType": "AtomicTag"
+                }
+              ],
+              "typeId": "IO/AI"
+            },
+            {
+              "name": "DI_Feedback",
+              "tagType": "UdtInstance",
+              "tags": [
+                {
+                  "name": "Simulate_Value",
+                  "tagType": "AtomicTag",
+                  "valueSource": "memory"
+                },
+                {
+                  "name": "Value",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "name": "Simulate",
+                  "tagType": "AtomicTag",
+                  "valueSource": "memory"
+                }
+              ],
+              "typeId": "IO/DI"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AI_AO_DI",
+      "tagType": "UdtType",
+      "tags": [
+        {
+          "name": "IO",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "name": "DI_Feedback",
+              "tagType": "UdtInstance",
+              "tags": [
+                {
+                  "name": "Simulate",
+                  "tagType": "AtomicTag",
+                  "valueSource": "memory"
+                },
+                {
+                  "name": "Value",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "name": "Simulate_Value",
+                  "tagType": "AtomicTag",
+                  "valueSource": "memory"
+                }
+              ],
+              "typeId": "IO/DI"
+            },
+            {
+              "name": "AI_Feedback",
+              "tagType": "UdtInstance",
+              "tags": [
+                {
+                  "name": "Simulate",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "name": "Simulate_Value",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "name": "Value",
+                  "tagType": "AtomicTag"
+                }
+              ],
+              "typeId": "IO/AI"
+            },
+            {
+              "name": "AO_Command",
+              "tagType": "UdtInstance",
+              "tags": [
+                {
+                  "name": "Simulate_Value",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "name": "Setpoint",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "name": "Simulate",
+                  "tagType": "AtomicTag"
+                }
+              ],
+              "typeId": "IO/AO"
+            }
+          ]
+        },
+        {
+          "name": "Alarms",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "alarms": [
+                {
+                  "mode": "BadQuality",
+                  "name": "Bad",
+                  "priority": "High"
+                }
+              ],
+              "expression": "if(\r\n  {[.]../IO/AO_Command/Simulate},\r\n  {[.]../IO/AO_Command/Simulate_Value},\r\n  {[.]../IO/AO_Command/Setpoint}\r\n)\r\n",
+              "name": "AO_Bad_Quality",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "BelowValue",
+                  "name": "Low_Low",
+                  "priority": "High",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/Low_Low_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "Low_Low",
+              "sourceTagPath": {
+                "bindType": "parameter",
+                "binding": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)"
+              },
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "BelowValue",
+                  "name": "Low",
+                  "priority": "Low",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/Low_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "Low",
+              "sourceTagPath": {
+                "bindType": "parameter",
+                "binding": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)"
+              },
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarms": [
+                {
+                  "name": "ESTOP",
+                  "priority": "Critical",
+                  "setpointA": 1.0
+                }
+              ],
+              "dataType": "Boolean",
+              "name": "ESTOP",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "alarms": [
+                {
+                  "mode": "BadQuality",
+                  "name": "Bad",
+                  "priority": "High"
+                }
+              ],
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "AI_Bad_Quality",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarms": [
+                {
+                  "mode": "BadQuality",
+                  "name": "Bad",
+                  "priority": "High"
+                }
+              ],
+              "expression": "if(\r\n  {[.]../IO/DI_Feedback/Simulate},\r\n  {[.]../IO/DI_Feedback/Simulate_Value},\r\n  {[.]../IO/DI_Feedback/Value}\r\n)\r\n",
+              "name": "DI_Bad_Quality",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "AboveValue",
+                  "name": "High_High",
+                  "priority": "High",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/High_High_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "High_High",
+              "sourceTagPath": {
+                "bindType": "parameter",
+                "binding": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)"
+              },
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "AboveValue",
+                  "name": "High",
+                  "priority": "Low",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/High_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "High",
+              "sourceTagPath": "[.]../IO/AI_Feedback/Value",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            }
+          ]
+        },
+        {
+          "name": "Parameters",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "dataType": "Boolean",
+              "name": "Interlocked",
+              "tagType": "AtomicTag",
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "Bypass",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "name": "High_High_Sp",
+              "tagType": "AtomicTag",
+              "value": 100,
+              "valueSource": "memory"
+            },
+            {
+              "name": "High_Sp",
+              "tagType": "AtomicTag",
+              "value": 90,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "OOS",
+              "tagType": "AtomicTag",
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/DI_Bad_Quality.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "DI_Bad_Alarm_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/High.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "High_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "Out_Min",
+              "tagType": "AtomicTag",
+              "value": 0.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\t\n\talarm_eval_path = \"[.]../Alarms/Low.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "Low_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/AO_Bad_Quality.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "AO_Bad_Alarm_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "ResetReq",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/High_High.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "High_High_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/AI_Bad_Quality.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "AI_Bad_Alarm_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "Operator",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "Out_Max",
+              "tagType": "AtomicTag",
+              "value": 100.0,
+              "valueSource": "memory"
+            },
+            {
+              "name": "Low_Sp",
+              "tagType": "AtomicTag",
+              "value": 10,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\t\n\talarm_eval_path = \"[.]../Alarms/Low_Low.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "Low_Low_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "name": "Low_Low_Sp",
+              "tagType": "AtomicTag",
+              "value": 30,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "Maintenance",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            }
+          ]
+        },
+        {
+          "name": "Device_Core",
+          "tagType": "UdtInstance",
+          "tags": [
+            {
+              "name": "Description",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "Area",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "ShortName",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "Unit",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "TagName",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "ProfileDefinition",
+              "tagType": "AtomicTag",
+              "value": "https://raw.githubusercontent.com/williamsA1234/Skellig_ProveIt2026/main/AI_AO_DI_V1.json"
+            }
+          ],
+          "typeId": "Core/DeviceCore"
+        }
+      ]
+    },
+    {
+      "name": "AI_AO_DI_DO",
+      "tagType": "UdtType",
+      "tags": [
+        {
+          "name": "IO",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "name": "DI_Feedback",
+              "tagType": "UdtInstance",
+              "tags": [
+                {
+                  "name": "Value",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "name": "Simulate",
+                  "tagType": "AtomicTag",
+                  "value": false,
+                  "valueSource": "memory"
+                },
+                {
+                  "dataType": "Boolean",
+                  "name": "Simulate_Value",
+                  "tagType": "AtomicTag",
+                  "value": false,
+                  "valueSource": "memory"
+                }
+              ],
+              "typeId": "IO/DI"
+            },
+            {
+              "name": "DO_Command",
+              "tagType": "UdtInstance",
+              "tags": [
+                {
+                  "name": "Simulate",
+                  "tagType": "AtomicTag",
+                  "value": false,
+                  "valueSource": "memory"
+                },
+                {
+                  "name": "Setpoint",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "dataType": "Boolean",
+                  "name": "Simulate_Value",
+                  "tagType": "AtomicTag",
+                  "value": false,
+                  "valueSource": "memory"
+                }
+              ],
+              "typeId": "IO/DO"
+            },
+            {
+              "name": "AO_Command",
+              "tagType": "UdtInstance",
+              "tags": [
+                {
+                  "dataType": "Boolean",
+                  "name": "Simulate",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "dataType": "Float4",
+                  "name": "Simulate_Value",
+                  "tagType": "AtomicTag",
+                  "value": 0.0
+                },
+                {
+                  "name": "Setpoint",
+                  "tagType": "AtomicTag"
+                }
+              ],
+              "typeId": "IO/AO"
+            },
+            {
+              "name": "AI_Feedback",
+              "tagType": "UdtInstance",
+              "tags": [
+                {
+                  "dataType": "Float4",
+                  "name": "Simulate_Value",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "dataType": "Boolean",
+                  "name": "Simulate",
+                  "tagType": "AtomicTag"
+                },
+                {
+                  "name": "Value",
+                  "tagType": "AtomicTag"
+                }
+              ],
+              "typeId": "IO/AI"
+            }
+          ]
+        },
+        {
+          "name": "Alarms",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "alarms": [
+                {
+                  "mode": "BadQuality",
+                  "name": "Bad",
+                  "priority": "High"
+                }
+              ],
+              "expression": "if(\r\n  {[.]../IO/DO_Command/Simulate},\r\n  {[.]../IO/DO_Command/Simulate_Value},\r\n  {[.]../IO/DO_Command/Setpoint}\r\n)\r\n",
+              "name": "DO_Bad_Quality",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "BelowValue",
+                  "name": "Low_Low",
+                  "priority": "High",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/Low_Low_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "Low_Low",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarms": [
+                {
+                  "mode": "BadQuality",
+                  "name": "Bad",
+                  "priority": "High"
+                }
+              ],
+              "expression": "if(\r\n  {[.]../IO/AO_Command/Simulate},\r\n  {[.]../IO/AO_Command/Simulate_Value},\r\n  {[.]../IO/AO_Command/Setpoint}\r\n)\r\n",
+              "name": "AO_Bad_Quality",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarms": [
+                {
+                  "mode": "BadQuality",
+                  "name": "Bad",
+                  "priority": "High"
+                }
+              ],
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "AI_Bad_Quality",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarms": [
+                {
+                  "name": "ESTOP",
+                  "priority": "Critical",
+                  "setpointA": 1.0
+                }
+              ],
+              "dataType": "Boolean",
+              "name": "ESTOP",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "AboveValue",
+                  "name": "High",
+                  "priority": "Low",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/High_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "High",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "AboveValue",
+                  "name": "High_High",
+                  "priority": "High",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/High_High_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "High_High",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarmEvalEnabled": false,
+              "alarms": [
+                {
+                  "mode": "BelowValue",
+                  "name": "Low",
+                  "priority": "Low",
+                  "setpointA": {
+                    "bindType": "Tag",
+                    "value": "[.]../Parameters/Low_Sp"
+                  }
+                }
+              ],
+              "dataType": "Float4",
+              "expression": "if(\r\n  {[.]../IO/AI_Feedback/Simulate},\r\n  {[.]../IO/AI_Feedback/Simulate_Value},\r\n  {[.]../IO/AI_Feedback/Value}\r\n)\r\n",
+              "name": "Low",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            },
+            {
+              "alarms": [
+                {
+                  "mode": "BadQuality",
+                  "name": "Bad",
+                  "priority": "High"
+                }
+              ],
+              "expression": "if(\r\n  {[.]../IO/DI_Feedback/Simulate},\r\n  {[.]../IO/DI_Feedback/Simulate_Value},\r\n  {[.]../IO/DI_Feedback/Value}\r\n)\r\n",
+              "name": "DI_Bad_Quality",
+              "tagType": "AtomicTag",
+              "valueSource": "expr"
+            }
+          ]
+        },
+        {
+          "name": "Device_Core",
+          "tagType": "UdtInstance",
+          "tags": [
+            {
+              "name": "TagName",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "Area",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "ShortName",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "Description",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "Unit",
+              "tagType": "AtomicTag"
+            },
+            {
+              "name": "ProfileDefinition",
+              "tagType": "AtomicTag",
+              "value": "https://raw.githubusercontent.com/williamsA1234/Skellig_ProveIt2026/main/AI_AO_DI_DO_V1.json"
+            }
+          ],
+          "typeId": "Core/DeviceCore"
+        },
+        {
+          "name": "Parameters",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "dataType": "Boolean",
+              "name": "ResetReq",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/Low.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "Low_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "OOS",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/AO_Bad_Quality.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "AO_Bad_Alarm_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/DI_Bad_Quality.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "DI_Bad_Alarm_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "Maintenance",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "Out_Min",
+              "tagType": "AtomicTag",
+              "value": 0.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/High.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "High_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "High_High_Sp",
+              "tagType": "AtomicTag",
+              "value": 100.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "Out_Max",
+              "tagType": "AtomicTag",
+              "value": 100.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "Low_Low_Sp",
+              "tagType": "AtomicTag",
+              "value": 5.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "Low_Sp",
+              "tagType": "AtomicTag",
+              "value": 10.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Float4",
+              "name": "High_Sp",
+              "tagType": "AtomicTag",
+              "value": 90.0,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/AI_Bad_Quality.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "AI_Bad_Alarm_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "name": "Operator",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/DO_Bad_Quality.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "DO_Bad_Alarm_Enab",
+              "tagType": "AtomicTag",
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/Low_Low.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "Low_Low_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            },
+            {
+              "dataType": "Boolean",
+              "eventScripts": [
+                {
+                  "eventid": "valueChanged",
+                  "script": "\n\talarm_eval_path = \"[.]../Alarms/High_High.AlarmEvalEnabled\"\n\tsystem.tag.writeBlocking([alarm_eval_path], [currentValue.value])"
+                }
+              ],
+              "name": "High_High_Enab",
+              "tagType": "AtomicTag",
+              "value": false,
+              "valueSource": "memory"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
